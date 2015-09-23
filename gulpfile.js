@@ -47,6 +47,7 @@ function concatXqryFiles (cb) {
 	var queries = [];
 
 	files.forEach(function (f) {
+
 	    fs.readFile(IN_DIR + f, 'utf8', function (e, data) {
 		if (e) {
 		    console.log('ERROR: Could not read file: ' + (IN_DIR + f));
@@ -64,10 +65,10 @@ function concatXqryFiles (cb) {
 		var qry = {
 		    contents : [
 			'    <query name="' + (CONF.names[namepart] || namepart) + '" '
-			    + 'focus="false" ' +
-			    + getContentSource (namepart) +
-			    + getTabMode (ext) + 
-			    'active="false" mode="xquery">',
+			    + 'focus="false" ' 
+			    + getContentSource (namepart) 
+			    + getTabMode (ext)
+			    + ' active="false">',
 			xmlEscape(data),
 			'    </query>'
 		    ].join(''),
@@ -81,10 +82,10 @@ function concatXqryFiles (cb) {
 		    && (f[0] !== '#')
 		    && ext !== 'xml' )
 		    queries.push(qry);				
-		
-		if (!--remaining) writeoutXmlFile();
 
-		function getTabMode () {
+		if (!--remaining) writeoutXmlFile();
+		
+		function getTabMode (ext) {
 		    if (!ext) return '';
 		    var type='xquery';
 		    switch (ext) {
@@ -96,11 +97,13 @@ function concatXqryFiles (cb) {
 		    case 'xquery':type = 'xquery';break;
 		    default : type = 'xquery';break;
 		    }
-		    return ' mode="' + type + '"';
+		    var ret = ' mode="' + type + '"';
+		    return ret;
 		}
 		function getContentSource (n) {
 		    if (CONF.sources && CONF.sources[n]) {
-			return ' content-source="as:' + CONF.sources[n] + ':"' 
+			var ret = ' content-source="as:' + CONF.sources[n] + ':"';
+			return ret;
 		    }
 		    return ' ';
 		}
@@ -118,8 +121,8 @@ function concatXqryFiles (cb) {
 			})
 			.map(function (q) {
 			    return q.contents;
-			});
-		    
+			    n			});
+
 		    var xml = [
 			'<export>',
 			'  <workspace name="' + CONF['ws-name'] + '">',
@@ -147,7 +150,7 @@ function concatXqryFiles (cb) {
 		}
 	    });
 	});
-    });
+    });    
 }
 
 function showHelp (cb) {
