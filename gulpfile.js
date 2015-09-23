@@ -7,12 +7,28 @@ var fs = require('fs');
 
 var OUT_DIR = './QC/';
 var IN_DIR = './QC/';
-var CONF = require(IN_DIR + "/config.json");
+// todo: review config format. convert to tab array
+var CONF = require(IN_DIR + "config.json");
 var EXPORT_NAME = CONF['ws-name'] || 'WS-QCOWS';
 
 gulp.task('default', showHelp);
 gulp.task('generate', function (callback) {
     // todo: stream
+    process.argv.forEach(function (a, i) {
+	if (a === '--folder') {
+	    try {
+		OUT_DIR += process.argv[i+1] + '/';
+		IN_DIR += process.argv[i+1] + '/';
+		CONF = require(IN_DIR + "config.json");
+	    }
+	    catch (e) {
+		console.log('Make sure the folder and config.json exist!');
+		console.log(e);
+		process.exit();
+	    }
+	}
+	    
+    })
     concatXqryFiles(callback);
 });
 
@@ -41,8 +57,10 @@ function concatXqryFiles (cb) {
 
 		var qry = {
 		    contents : [
-			'    <query name="' + (CONF.names[namepart] || namepart)
-			    + '" focus="false" ' +
+			'    <query name="' + (CONF.names[namepart] || namepart) + '" '
+			    + 'focus="false" ' +
+			    + getContentSource (namepart) +
+			    + getTabMode (ext) + 
 			    'active="false" mode="xquery">',
 			xmlEscape(data),
 			'    </query>'
@@ -58,9 +76,28 @@ function concatXqryFiles (cb) {
 		    && ext !== 'xml' )
 		    queries.push(qry);				
 		
-		
 		if (!--remaining) writeoutXmlFile();
 
+		function getTabMode () {
+		    if (!ext) return '';
+		    var type='xquery';
+		    switch (ext) {
+		    case 'sparql':type = 'sparql';break;
+		    case 'sql':type = 'sql';break;
+		    case 'sjs':type = 'javascript';break;
+		    case 'js':type = 'javascript';break;
+		    case 'xqy':type = 'xquery';break;
+		    case 'xquery':type = 'xquery';break;
+		    default : type = 'xquery';break;
+		    }
+		    return ' mode="' + type + '"';
+		}
+		function getContentSource (n) {
+		    if (CONF.sources && CONF.sources[n]) {
+			return ' content-source="as:' + CONF.sources[n] + ':"' 
+		    }
+		    return ' ';
+		}
 		function writeoutXmlFile () {
 		    queries = queries
 			.sort(function (a, b) {

@@ -28,13 +28,18 @@ Intended to enable offline editing in you favourite editor.
     
   Import files into query console to test.
   
-  
+#### Working with folders
+
+  To import from a subfolder and keep work separte use
+
+    gulp generate --folder SomeFolder
+
+  This will move input and outpt data to the location ./QC/SomeFolder/
+
 ## To Do 
 
 The following options would be nice to have:
 
 * Add ```gulp watch``` option
-* Allow heirarchy of files
 * Add import option for exported qconsole workspace defintions
-* Allow paths to be defined in config.json file for input and output files
-* Enable working with multiple input folders
+
