@@ -15,10 +15,10 @@ Intended to enable offline editing in you favourite editor.
   Edit xquery files and/or sjs files in folder QC/
   e.g.
     
-    QC/scratch.xqy
-    QC/file1.xqy
+    QC/Default/scratch.xqy
+    QC/Default/file1.xqy
     etc.
- 
+
   Optionally, edit *config.json* to change the default name for the workspace and  
   
 ### Generate and test  
@@ -30,7 +30,7 @@ Intended to enable offline editing in you favourite editor.
   
 #### Working with folders
 
-  To import from a subfolder and keep work separte use
+  To import from a subfolder other than Default and keep work separte use:
 
     gulp generate --folder SomeFolder
 

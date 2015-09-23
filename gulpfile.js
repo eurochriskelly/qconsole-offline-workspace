@@ -7,19 +7,18 @@ var fs = require('fs');
 
 var OUT_DIR = './QC/';
 var IN_DIR = './QC/';
+var CONF, EXPORT_NAME;
 // todo: review config format. convert to tab array
-var CONF = require(IN_DIR + "config.json");
-var EXPORT_NAME = CONF['ws-name'] || 'WS-QCOWS';
 
 gulp.task('default', showHelp);
 gulp.task('generate', function (callback) {
     // todo: stream
+    var foundFolder;
     process.argv.forEach(function (a, i) {
 	if (a === '--folder') {
 	    try {
-		OUT_DIR += process.argv[i+1] + '/';
-		IN_DIR += process.argv[i+1] + '/';
-		CONF = require(IN_DIR + "config.json");
+		foundFolder = true;
+		setFolders(process.argv[i+1]);
 	    }
 	    catch (e) {
 		console.log('Make sure the folder and config.json exist!');
@@ -27,9 +26,16 @@ gulp.task('generate', function (callback) {
 		process.exit();
 	    }
 	}
-	    
-    })
+    });
+    if (!foundFolder) setFolders('Default');
     concatXqryFiles(callback);
+
+    function setFolders(folder) {
+	OUT_DIR += folder + '/';
+	IN_DIR += folder + '/';
+	CONF = require(IN_DIR + "config.json");
+	EXPORT_NAME = CONF['ws-name'] || 'WS-QCOWS';
+    }
 });
 
 //-----
