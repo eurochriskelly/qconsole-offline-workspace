@@ -11,8 +11,14 @@ Intended to enable offline editing in you favourite editor.
     npm install
     
 ### Edit and define workspace    
-  Edit xquery files and/or sjs files in folder QC/
   
+  Edit xquery files and/or sjs files in folder QC/
+  e.g.
+    
+    QC/scratch.xqy
+    QC/file1.xqy
+    etc.
+ 
   Optionally, edit *config.json* to change the default name for the workspace and  
   
 ### Generate and test  
