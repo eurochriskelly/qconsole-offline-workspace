@@ -1,5 +1,8 @@
 *~
-#*
+\#*
 build/
 src/
 node_modules/
+QC/*.xqy
+QC/*.sjs
+QC/*.xml

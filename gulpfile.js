@@ -5,11 +5,10 @@ var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 var fs = require('fs');
 
-
-var EXPORT_NAME = CONF['ws-name'] || 'WS-QCOWS';
 var OUT_DIR = './QC/';
 var IN_DIR = './QC/';
 var CONF = require(IN_DIR + "/config.json");
+var EXPORT_NAME = CONF['ws-name'] || 'WS-QCOWS';
 
 gulp.task('default', showHelp);
 gulp.task('generate', function (callback) {
@@ -31,9 +30,14 @@ function concatXqryFiles (cb) {
 		    console.log('ERROR: Could not read file: ' + (IN_DIR + f));
 		    process.exit();
 		}
+
 		var parts = f.split('.');
 		var ext = parts.length == 1 ? '' : parts[parts.length-1];
-		var namepart = parts.pop().join('.');
+		var namepart = parts[0];
+		if (parts.length > 1) {
+		    parts.pop();
+		    parts = parts.join('.');
+		}
 
 		var qry = {
 		    contents : [
