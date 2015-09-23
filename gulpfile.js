@@ -5,11 +5,11 @@ var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 var fs = require('fs');
 
-var CONF = require("./src/names.json");
 
 var EXPORT_NAME = CONF['ws-name'] || 'WS-QCOWS';
 var OUT_DIR = './QC/';
 var IN_DIR = './QC/';
+var CONF = require(IN_DIR + "/config.json");
 
 gulp.task('default', showHelp);
 gulp.task('generate', function (callback) {
@@ -31,8 +31,10 @@ function concatXqryFiles (cb) {
 		    console.log('ERROR: Could not read file: ' + (IN_DIR + f));
 		    process.exit();
 		}
-		var namepart = f.split('.')[0];
-		var ext = f.split('.')[1];
+		var parts = f.split('.');
+		var ext = parts.length == 1 ? '' : parts[parts.length-1];
+		var namepart = parts.pop().join('.');
+
 		var qry = {
 		    contents : [
 			'    <query name="' + (CONF.names[namepart] || namepart)
@@ -44,10 +46,12 @@ function concatXqryFiles (cb) {
 		    name : namepart
 		};
 
+		// ignore temp files, xml files and config file
 		if ((f[f.length-1] !== '~')
 		    && (f[0] !== '.')
-		    && (f.substring(0,5) !== 'names')
-		    && (f[0] !== '#'))
+		    && (f.substring(0,6) !== 'config')
+		    && (f[0] !== '#')
+		    && ext !== 'xml' )
 		    queries.push(qry);				
 		
 		
