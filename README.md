@@ -1,4 +1,5 @@
-# qconsole-offline-workspace
+# Marklogic qconsole-offline-workspace
+  
 
 Converts offline *xquery* and related files to a MarkLogic query console workflow in XML format. 
 
@@ -42,4 +43,6 @@ The following options would be nice to have:
 
 * Add ```gulp watch``` option
 * Add import option for exported qconsole workspace defintions
-
+* Update workspace automatically using ?format=import parameter
+* Should always run in current folder
+* Save on npm

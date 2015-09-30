@@ -1,12 +1,13 @@
 {
-  "name": "qc-offline",
-  "version": "1.0.0",
+  "name": "mlqcow",
+  "version": "0.0.1",
   "description": "Offline editor for query console queries",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "./lib/index.js",
+  "run" : {
+    "mlqcow" : "bin/mlqcow.js"
   },
-  "author": "",
+  "author": "Chris Kelly",
+  "preferGlobal" : "true",
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.9.0",
