@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "description": "Offline editor for query console queries",
   "main": "./lib/index.js",
+  "directories" : {
+    "bin" : "./bin"
+  },
   "run" : {
     "mlqcow" : "bin/mlqcow.js"
   },
-  "author": "Chris Kelly",
   "preferGlobal" : "true",
   "license": "ISC",
+  "dependencies" : {
+    "optimist" : "~0.3.5"
+  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
