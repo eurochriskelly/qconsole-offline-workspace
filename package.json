@@ -1,13 +1,13 @@
 {
   "name": "mlqcow",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Offline editor for query console queries",
   "main": "./lib/index.js",
   "directories" : {
     "bin" : "./bin"
   },
   "run" : {
-    "mlqcow" : "bin/mlqcow.js"
+    "mlqcow" : "bin/mlqcow"
   },
   "preferGlobal" : "true",
   "license": "ISC",
