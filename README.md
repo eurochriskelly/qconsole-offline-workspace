@@ -2,7 +2,7 @@
 
 Manage MarkLogic 'query console' queries offline.
 
-$$ Motiviation:
+## Motiviation:
 - Edit in favourite editor.
 - Manually reorder, rename and clean up tabs.
 - Manage query console scripts offline in project repository
