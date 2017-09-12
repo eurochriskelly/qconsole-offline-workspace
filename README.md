@@ -1,48 +1,40 @@
 # Marklogic qconsole-offline-workspace
-  
 
-Converts offline *xquery* and related files to a MarkLogic query console workflow in XML format. 
+Manage MarkLogic 'query console' queries offline.
 
-Intended to enable offline editing in you favourite editor.
+$$ Motiviation:
+- Edit in favourite editor.
+- Manually reorder, rename and clean up tabs.
+- Manage query console scripts offline in project repository
 
 ## Usage
 ### Install dependencies
-
-    npm install -g gulp
     npm install
     
 ### Edit and define workspace    
   
-  Edit xquery files and/or sjs files in folder QC/
+  Edit xquery files and/or sjs files in folder workspaces/
   e.g.
     
-    QC/Default/scratch.xqy
-    QC/Default/file1.xqy
-    etc.
+    workspaces/Foo/scratch.xqy
+    workspaces/Bar/file1.sjs
+     etc.
 
   Optionally, edit *config.json* to change the default name for the workspace and  
   
 ### Generate and test  
-  When ready run:
+    Generate a sample config file and modify as required
 
-    gulp generate
+    mlqcow --generate-conf
     
-  Import files into query console to test.
-  
-#### Working with folders
+    Generate workspace:
 
-  To import from a subfolder other than Default and keep work separte use:
-
-    gulp generate --folder SomeFolder
-
-  This will move input and outpt data to the location ./QC/SomeFolder/
+    mlqcow
 
 ## To Do 
 
 The following options would be nice to have:
 
-* Add ```gulp watch``` option
-* Add import option for exported qconsole workspace defintions
-* Update workspace automatically using ?format=import parameter
-* Should always run in current folder
-* Save on npm
+* Make process reversible. Generate folder from xml file and files from tabs.
+* Upload to query console.
+* AutoSync: Manage all workspaces offline. 
