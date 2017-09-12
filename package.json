@@ -1,22 +1,22 @@
 {
   "name": "mlqcow",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Offline editor for query console queries",
   "main": "./lib/index.js",
-  "directories" : {
-    "bin" : "./bin"
+  "directories": {
+    "bin": "./bin"
   },
-  "run" : {
-    "mlqcow" : "bin/mlqcow"
+  "run": {
+    "mlqcow": "bin/mlqcow"
   },
-  "preferGlobal" : "true",
+  "scripts": {
+    "generate": "node lib/run.js"
+  },
+  "preferGlobal": "true",
   "license": "ISC",
-  "dependencies" : {
-    "optimist" : "~0.3.5"
+  "dependencies": {
+    "cli-color": "^1.2.0",
+    "optimist": "~0.3.5"
   },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-util": "^3.0.6",
-    "through2": "^2.0.0"
-  }
+  "devDependencies": {}
 }
