@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var argv = require('optimist').argv;
+var clc = require('cli-color');
+var mlqcow = require('../lib/index.js');
+
+console.log(clc.yellow("MLQCOW: Marklogic Query Console Offline Workspace"));
+
+if (argv.watch) {
+    mlqcow.watch(function () {
+        console.log('Stopped watching');
+    });
+    return;
+}
+
+mlqcow.generate((e) => {
+    if (e) {
+        console.log(clc.red('Error during conversion'));
+        console.log(e);
+        return;
+    }
+});
+
+process.on('error', function () {
+    setTimeout(function () {
+        console.log('Process died unexpectedly.');
+    }, 1000);
+});
