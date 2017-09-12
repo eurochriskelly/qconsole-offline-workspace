@@ -1,6 +1,16 @@
-{
-  "ws-name" : "TEST WORKSPACE",
-  "names" : {
-	  "abc" : "1 : HELLO"
+[
+  {
+    "ws-name" : "TEST WORKSPACE",
+    "folder" : "Workspaces/Test",
+    "names" : {
+      "abc" : "1 : HELLO"
+    }
+  },
+  {
+    "ws-name" : "Another",
+    "folder" : "Workspaces/Another",
+    "names" : {
+      "def" : "ok now"
+    }
   }
-}
+]
